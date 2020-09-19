@@ -42,7 +42,7 @@
 //! 
 //! ## Dependencies
 //! + random-number = "0.1.3"
-//! 
+//! + log = "0.4.11"
 //! ## TODO
 //! + Add algorithm module for supporting different scheduling algorithm
 //! 

@@ -38,6 +38,7 @@ match new_pool.execute() {
 <h2 id="dependencies" class="section-header"><a href="#dependencies">Dependencies</a></h2>
 <ul>
 <li>random-number = &quot;0.1.3&quot;</li>
+<li>log = &quot;0.4.11&quot;</li>
 </ul>
 <h2 id="todo" class="section-header"><a href="#todo">TODO</a></h2>
 <ul>
