@@ -53,4 +53,7 @@ match new_pool.execute() {
 </td></tr><tr class='module-item'><td><a class="mod" href="signal/index.html" title='rust_pool::signal mod'>signal</a></td><td class='docblock-short'><p>Signal Implement</p>
 </td></tr><tr class='module-item'><td><a class="mod" href="task/index.html" title='rust_pool::task mod'>task</a></td><td class='docblock-short'><p>Task Implement</p>
 </td></tr><tr class='module-item'><td><a class="mod" href="worker/index.html" title='rust_pool::worker mod'>worker</a></td><td class='docblock-short'><p>Worker Implement</p>
-</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section></body></html>
+</td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section></body></html>  
+
+## Document
+Run `cargo doc --open` to read the docment.  
