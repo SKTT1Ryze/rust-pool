@@ -2,7 +2,7 @@
 use std::vec::Vec;
 use super::error::Error;
 use super::config::MAX_COOKIE_NUM;
-
+use log::{info, error};
 /// Cookie Generator
 /// Used to generate unique cookie
 pub struct CookieGenerator {
@@ -25,7 +25,7 @@ impl CookieGenerator {
     pub fn generate(&mut self) -> Result<usize, Error> {
         // too much cookie
         if self.used_cookie.len() > MAX_COOKIE_NUM {
-            println!("Too much used cookie, stop generate.");
+            error!("Too much used cookie, stop generate.");
             return Err(Error::CookieGenerateError)
         }
         // generate a unique cookie
@@ -41,6 +41,7 @@ impl CookieGenerator {
     /// Not used in this crate yet
     #[allow(dead_code)]
     pub fn reset(&mut self) {
+        info!("CookieGenerator reset.");
         self.used_cookie.clear();
         self.size = 0;
         self.current = 0;

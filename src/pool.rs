@@ -16,6 +16,11 @@ use std:: {
     sync::Mutex,
 };
 
+use log::{
+    info,
+    error,
+};
+
 /// Struct of thread pool
 /// Contains:  
 /// + task queue
@@ -50,7 +55,10 @@ impl ThreadPool {
                 for id in 0..size {
                     let cookie = match cookie_box.generate() {
                         Ok(cookie) => cookie,
-                        Err(err) => panic!(err),
+                        Err(err) => {
+                            error!("Generate cookie error.");
+                            panic!(err);
+                        },
                     };
                     let worker = Worker::new(id, cookie, DEFAULT_PRIORITY, Arc::clone(&receiver));
                     workers.push(worker);
@@ -68,6 +76,7 @@ impl ThreadPool {
                 )
             },
             false => {
+                error!("Given size to create ThreadPool error.");
                 Err(Error::PoolCreationError)
             }
         }
@@ -78,11 +87,15 @@ impl ThreadPool {
     /// with a specified id
     pub fn push_worker(&mut self, id: usize, receiver: Arc<Mutex<mpsc::Receiver<Signal>>>) -> Result<(), Error> {
         if self.workers.len() >= self.max_worker {
+            error!("Workers queue has been full.");
             return Err(Error::PushWrokerError);
         }
         let new_cookie = match self.cookie_box.generate() {
             Ok(cookie) => cookie,
-            Err(err) => panic!(err),
+            Err(err) => {
+                error!("Generate cookie error.");
+                panic!(err);
+            }
         };
         let new_worker = Worker::new(id, new_cookie, DEFAULT_PRIORITY, receiver);
         self.workers.push(new_worker);
@@ -112,6 +125,7 @@ impl ThreadPool {
         match self.run_all_workers() {
             Ok(_) => {},
             Err(err) => {
+                error!("Execute ThreadPool error.");
                 panic!(err);
             }
         }
@@ -131,7 +145,7 @@ impl ThreadPool {
     pub fn run_all_workers(&mut self) -> Result<(), Error> {
         for worker in self.workers.iter_mut() {
             let (id, _cookie) = worker.run(worker.receiver.clone())?;
-            println!("Worker with id [{}] and cookie [{}] begin running...", id, worker.cookie());
+            info!("Worker with id [{}] and cookie [{}] begin running...", id, worker.cookie());
         }
         Ok(())
     }
@@ -142,10 +156,11 @@ impl ThreadPool {
         for worker in self.workers.iter_mut() {
             if worker.id() == id {
                 let (id, cookie) = worker.run(worker.receiver.clone())?;
-                println!("Worker with id [{}] and cookie [{}] begin running...", id, worker.cookie());
+                info!("Worker with id [{}] and cookie [{}] begin running...", id, worker.cookie());
                 return Ok(cookie);
             }
         }
+        error!("Run worker with id {} error", id);
         Err(Error::RunWorkerError)
     }
     /// Get the size of the ThreadPool
@@ -163,13 +178,13 @@ impl ThreadPool {
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
-        println!("Sending terminate message to all workers...");
+        info!("Sending terminate message to all workers...");
         for _ in &mut self.workers {
             self.broadcast.send(Signal::Terminate).unwrap();
         }
-        println!("Killing all workers...");
+        info!("Killing all workers...");
         for worker in &mut self.workers {
-            println!("Killing worker [{}]...", worker.id());
+            info!("Killing worker [{}]...", worker.id());
             match worker.end() {
                 Ok(_) => {
                     println!("Killed worker [{}].", worker.id())
