@@ -2,8 +2,9 @@
 //! # A thread pool written with Rust
 //! 
 //! - Create a thread pool to run your code
+//! - Use log crate to print log
 //! - [TODO] Support different scheduling algorithm
-//! - [TODO] Use log crate to print log
+//! 
 //! 
 //! ## Example
 //! ```Rust
@@ -44,7 +45,6 @@
 //! 
 //! ## TODO
 //! + Add algorithm module for supporting different scheduling algorithm
-//! + Use log crate from crate.io to manage log
 //! 
 //! ## **Welcome to contribute!**
 //! 

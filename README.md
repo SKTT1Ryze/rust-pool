@@ -1,8 +1,8 @@
 </a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/rust_pool/lib.rs.html#2-95' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>rust_pool</a></span></h1><div class='docblock'><h1 id="a-thread-pool-written-with-rust" class="section-header"><a href="#a-thread-pool-written-with-rust">A thread pool written with Rust</a></h1>
 <ul>
 <li>Create a thread pool to run your code</li>
+<li>Use log crate to print log</li>
 <li>[TODO] Support different scheduling algorithm</li>
-<li>[TODO] Use log crate to print log</li>
 </ul>
 <h2 id="example" class="section-header"><a href="#example">Example</a></h2>
 <pre><code class="language-Rust">use rust_pool::ThreadPool;
@@ -42,7 +42,6 @@ match new_pool.execute() {
 <h2 id="todo" class="section-header"><a href="#todo">TODO</a></h2>
 <ul>
 <li>Add algorithm module for supporting different scheduling algorithm</li>
-<li>Use log crate from crate.io to manage log</li>
 </ul>
 <h2 id="welcome-to-contribute" class="section-header"><a href="#welcome-to-contribute"><strong>Welcome to contribute!</strong></a></h2></div><h2 id='reexports' class='section-header'><a href="#reexports">Re-exports</a></h2>
 <table><tr><td><code>pub use <a class="mod" href="../rust_pool/pool/index.html" title="mod rust_pool::pool">pool</a>::*;</code></td></tr></table><h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
